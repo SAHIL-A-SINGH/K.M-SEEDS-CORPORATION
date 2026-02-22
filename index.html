@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K.M SEEDS CORPORATION</title>
+
+<style>
+/* ---------------- GLOBAL ---------------- */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#f7faf7;color:#222;line-height:1.6}
+
+h1,h2,h3{margin-bottom:10px}
+section{padding:70px 8%}
+.btn{
+    background:#2e7d32;
+    color:#fff;
+    padding:12px 20px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    transition:.3s;
+}
+.btn:hover{background:#1b5e20}
+
+/* ---------------- NAVBAR ---------------- */
+nav{
+    position:fixed;
+    width:100%;
+    top:0;
+    background:#ffffff;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 8%;
+    z-index:1000;
+}
+.logo{font-weight:bold;color:#2e7d32;font-size:20px}
+nav ul{display:flex;list-style:none}
+nav ul li{margin-left:20px}
+nav ul li a{text-decoration:none;color:#333;font-weight:600}
+.menu-toggle{display:none;font-size:22px;cursor:pointer}
+
+/* ---------------- HERO ---------------- */
+.hero{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+    url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80")
+    center/cover no-repeat;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+.hero h1{font-size:48px}
+.hero p{max-width:700px;margin:15px 0}
+
+/* ---------------- ABOUT ---------------- */
+.about-box{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+
+/* ---------------- PRODUCTS ---------------- */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+.card{
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    overflow:hidden;
+    transition:.3s;
+}
+.card:hover{transform:translateY(-6px)}
+.card img{width:100%;height:180px;object-fit:cover}
+.card-content{padding:15px}
+.price{color:#2e7d32;font-weight:bold;margin:8px 0}
+
+/* ---------------- CATEGORIES ---------------- */
+.category{
+    background:#e8f5e9;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* ---------------- CART ---------------- */
+.cart-icon{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#2e7d32;
+    color:white;
+    padding:15px;
+    border-radius:50%;
+    cursor:pointer;
+}
+.cart-count{
+    background:red;
+    padding:3px 7px;
+    border-radius:50%;
+    font-size:12px;
+    position:absolute;
+    top:-5px;
+    right:-5px;
+}
+
+.cart-panel{
+    position:fixed;
+    right:-400px;
+    top:0;
+    width:350px;
+    height:100%;
+    background:white;
+    box-shadow:-3px 0 10px rgba(0,0,0,.2);
+    padding:20px;
+    transition:.4s;
+    overflow:auto;
+    z-index:2000;
+}
+.cart-panel.active{right:0}
+
+/* ---------------- PAYMENT ---------------- */
+.payment-box{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:20px;
+}
+.pay{
+    background:#fff;
+    padding:20px;
+    text-align:center;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+
+/* ---------------- WHY US ---------------- */
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    text-align:center;
+}
+
+/* ---------------- CONTACT ---------------- */
+form input,form textarea{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+/* ---------------- FOOTER ---------------- */
+footer{
+    background:#1b5e20;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+/* ---------------- ANIMATION ---------------- */
+.fade{
+    opacity:0;
+    transform:translateY(30px);
+    transition:1s;
+}
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media(max-width:768px){
+    nav ul{
+        position:absolute;
+        top:60px;
+        left:0;
+        width:100%;
+        background:white;
+        flex-direction:column;
+        display:none;
+    }
+    nav ul.show{display:flex}
+    nav ul li{margin:15px}
+    .menu-toggle{display:block}
+    .about-box{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<div class="logo">K.M SEEDS CORPORATION</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<ul id="menu">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#categories">Categories</a></li>
+<li><a href="#offers">Offers</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+<h1>K.M SEEDS CORPORATION</h1>
+<p>Empowering farmers with high-quality seeds, fertilizers, and crop protection solutions for better yield and sustainable agriculture.</p>
+<a href="#products" class="btn">Shop Products</a>
+<a href="#contact" class="btn">Contact Us</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="fade">
+<h2>About Us</h2>
+<div class="about-box">
+<p>
+K.M SEEDS CORPORATION provides genuine agricultural inputs including pesticides,
+fertilizers, and seeds designed to improve crop productivity and farmer profitability.
+</p>
+<p>
+<b>Mission:</b> Support farmers with trusted solutions.<br>
+<b>Vision:</b> Sustainable agriculture through innovation.<br><br>
+✔ Genuine Products<br>
+✔ Farmer Support<br>
+✔ Trusted Brands
+</p>
+</div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="fade">
+<h2>Our Products</h2>
+<div class="grid" id="productList"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories" class="fade">
+<h2>Product Categories</h2>
+<div class="grid">
+<div class="category">Pesticides</div>
+<div class="category">Fertilizers</div>
+<div class="category">Seeds</div>
+<div class="category">Plant Growth Promoters</div>
+<div class="category">Tools & Accessories</div>
+</div>
+</section>
+
+<!-- OFFERS -->
+<section id="offers" class="fade">
+<h2>Featured Offers</h2>
+<div class="grid">
+<div class="card"><div class="card-content">🔥 Bestseller Fertilizer - 20% OFF</div></div>
+<div class="card"><div class="card-content">🌱 Hybrid Seeds Special Discount</div></div>
+</div>
+</section>
+
+<!-- PAYMENT -->
+<section class="fade">
+<h2>Payment Options</h2>
+<div class="payment-box">
+<div class="pay">UPI</div>
+<div class="pay">Credit/Debit Card</div>
+<div class="pay">Cash on Delivery</div>
+<div class="pay">Net Banking</div>
+</div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="fade">
+<h2>Why Choose Us</h2>
+<div class="features">
+<div>✅ Genuine Products</div>
+<div>🚚 Fast Delivery</div>
+<div>👨‍🌾 Farmer Support</div>
+<div>💰 Affordable Pricing</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="fade">
+<h2>Contact Us</h2>
+<form>
+<input placeholder="Name">
+<input placeholder="Phone">
+<textarea placeholder="Message"></textarea>
+<button class="btn">Send Message</button>
+</form>
+<p>Email: kt0120243@gmail.com</p>
+<p>Phone: +91 8433471984</p>
+<p>Address: Somna-Gabhana,Aligarh, Uttar Pradesh, India</p>
+<iframe width="100%" height="250" style="border:0"
+src="https://maps.google.com/maps?q=uttar%20pradesh&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+</section>
+
+<footer>
+<p>© 2026 K.M SEEDS CORPORATION | All Rights Reserved</p>
+</footer>
+
+<!-- CART -->
+<div class="cart-icon" onclick="toggleCart()">🛒
+<span class="cart-count" id="cartCount">0</span>
+</div>
+
+<div class="cart-panel" id="cartPanel">
+<h3>Your Cart</h3>
+<div id="cartItems"></div>
+<h4>Total: ₹<span id="total">0</span></h4>
+<button class="btn" onclick="checkout()">Checkout (Demo)</button>
+</div>
+
+<script>
+/* ---------------- MENU ---------------- */
+function toggleMenu(){
+document.getElementById("menu").classList.toggle("show");
+}
+
+/* ---------------- PRODUCTS DATA ---------------- */
+const products=[
+{name:"Crop Shield Pesticide",price:450,img:"https://images.unsplash.com/photo-1598515213691-1c9a8f3d8a2a?auto=format&fit=crop&w=800&q=60"},
+{name:"Organic Fertilizer",price:650,img:"https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=60"},
+{name:"Hybrid Wheat Seeds",price:900,img:"https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=800&q=60"}
+];
+
+const productList=document.getElementById("productList");
+products.forEach((p,i)=>{
+productList.innerHTML+=`
+<div class="card">
+<img src="${p.img}">
+<div class="card-content">
+<h3>${p.name}</h3>
+<p class="price">₹${p.price}</p>
+<p>High quality agriculture product.</p>
+<button class="btn" onclick="addToCart(${i})">Add to Cart</button>
+</div>
+</div>`;
+});
+
+/* ---------------- CART ---------------- */
+let cart=[];
+function addToCart(i){
+cart.push(products[i]);
+updateCart();
+}
+function updateCart(){
+let cartItems=document.getElementById("cartItems");
+cartItems.innerHTML="";
+let total=0;
+cart.forEach((item,index)=>{
+total+=item.price;
+cartItems.innerHTML+=`
+<p>${item.name} - ₹${item.price}
+<button onclick="removeItem(${index})">❌</button></p>`;
+});
+document.getElementById("total").innerText=total;
+document.getElementById("cartCount").innerText=cart.length;
+}
+function removeItem(i){
+cart.splice(i,1);
+updateCart();
+}
+function toggleCart(){
+document.getElementById("cartPanel").classList.toggle("active");
+}
+function checkout(){
+alert("Demo checkout. Payment integration not enabled.");
+}
+
+/* ---------------- SCROLL ANIMATION ---------------- */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+});
+document.querySelectorAll(".fade").forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
